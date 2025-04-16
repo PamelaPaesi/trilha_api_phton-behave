@@ -1,11 +1,14 @@
-import requests
+from util.environments.gen_func import *
 
-url = "https://api.restful-api.dev/objects"
-data = {'id':1}
-response = requests.get(url=url,data=data)
 
-assert response.status_code == 200
+def main_sem_args():
+    try:
+        features = [
+            "criacao_cenario.feature"
+        ]
+        for feature in features:
+            executar(feature)
+    except Exception as e:
+        print(e)
 
-json_data = response.json()
-assert json_data[0]['id'] == '1'
-print(json_data[0])
+main_sem_args()
