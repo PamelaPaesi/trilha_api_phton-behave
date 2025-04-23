@@ -4,7 +4,8 @@ from util.environments.gen_func import *
 def main_sem_args():
     try:
         features = [
-            "criacao_cenario.feature"
+            "criacao_cenario.feature",
+            "ordem_de_compra.feature"
         ]
         for feature in features:
             executar(feature)
