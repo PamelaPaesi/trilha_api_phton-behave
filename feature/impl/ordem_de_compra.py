@@ -1,4 +1,4 @@
-from util.requests.request import *
+import requests
 from datetime import datetime
 
 
@@ -16,7 +16,6 @@ class OrdemDeCompra:
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         }
-
         data = {
             "id": self.id,
             "petId": self.petId,
@@ -29,15 +28,10 @@ class OrdemDeCompra:
         self.status_code = response.status_code
         return response
 
-    def get_detalhes_ordem(self):
-        header = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        }
-        body = {}
-        self.request_ret = call(
-            GET,
-            self.url_petstore_order + "/" + str(self.id),
-            headers=header,
-            json=body,
-        )
+    def get_detalhes_ordem(self, id):
+        url = f"{self.url_petstore_order}/{id}"
+        response = requests.get(url)
+        self.status_code = response.status_code
+        if response.status_code == 200:
+            self.response_data = response.json()
+        return response
